@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLQ - Menu Utama</title>
+    <title>CLQ - Menu Utama Admin Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -29,16 +29,17 @@
         </p>
     </div>
 
+    <!-- Navigation Bar Header -->
     <nav class="sticky top-0 bg-white border-b border-gray-200 z-50 shadow-sm flex-shrink-0">
         <div class="w-full px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-12 h-full">
-                <!-- Perbaikan: Hapus parameter 'this' saat logo diklik agar tidak mengubah style logo -->
+                <!-- Logo BTN & Brand -->
                 <div class="flex flex-col items-center cursor-pointer justify-center" onclick="gantiKonten('beranda')">
                     <img src="https://www.btn.co.id/-/media/Images/Corporate/Icon/Logo-BTN.png" alt="Logo BTN" class="h-8">
                     <span class="text-[10px] font-bold text-btn-blue tracking-widest mt-1">CLQ MAMUJU</span>
                 </div>
                 
-                <!-- Perbaikan: Menghapus mt-4 agar tombol sejajar sempurna di tengah (center vertikal) -->
+                <!-- Navigation Items -->
                 <div class="hidden md:flex gap-6 items-center h-full">
                     <button id="btn-beranda" onclick="gantiKonten('beranda', this)" class="nav-btn text-btn-blue font-bold border-b-2 border-btn-red pb-1">Beranda</button>
                     <button onclick="gantiKonten('dashboard', this)" class="nav-btn text-slate-500 hover:text-blue-600 font-semibold transition-colors">Dashboard</button>
@@ -48,7 +49,7 @@
                 </div>
             </div>
 
-            <!-- Perbaikan: Menghapus mt-10 agar tanggal tidak turun ke bawah -->
+            <!-- Date Display -->
             <div class="flex items-center h-full">
                 <p id="tanggal-sekarang" class="text-xs font-bold text-slate-400 uppercase tracking-wider"></p>
             </div>
@@ -60,28 +61,28 @@
         <div id="view-beranda" class="max-w-4xl mx-auto space-y-6">
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
                 <h1 class="text-3xl font-extrabold text-slate-800">Selamat Datang di Admin Portal CLQ Mamuju</h1>
-                <p class="text-slate-500 mt-2 font-medium">Silakan pilih menu:</p>
+                <p class="text-slate-500 mt-2 font-medium">Silakan pilih menu di atas untuk mulai mengelola data:</p>
             </div>
 
             <div class="grid gap-4">
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all">
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('dashboard')">
                     <h3 class="text-lg font-bold text-btn-blue mb-2">Dashboard</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Yang berisi submenu untuk monitoring posisi target kunjungan harian dan juga menu pendukung untuk distribusi tugas, pembatalan tugas, pindah kelolaan, laporan kunjungan dan manajemen user.</p>
+                    <p class="text-slate-600 text-sm leading-relaxed">Berisi submenu monitoring posisi target kunjungan harian, distribusi tugas, pembatalan tugas, pindah kelolaan, laporan kunjungan, dan manajemen user.</p>
                 </div>
                 
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all">
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('rindeb')">
                     <h3 class="text-lg font-bold text-btn-blue mb-2">Update Rindeb</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Menu untuk update rindeb setiap hari yang datanya diambil dari sharepoint setiap pagi setelah ada data terbaru. Data tersebut harus di save as sebagai file csv.</p>
+                    <p class="text-slate-600 text-sm leading-relaxed">Menu update Rindeb harian dengan data dari SharePoint. Mendukung fitur impor file Excel/CSV, inspeksi otomatis, serta sinkronisasi kelolaan debitur.</p>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all">
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('bayar')">
                     <h3 class="text-lg font-bold text-btn-blue mb-2">Update Bayar</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Menu untuk update data debitur yang bayar. Data diambil dari sharepoint setiap 30 menit dan diupload untuk update datanya. Format data harus save as sebagai file csv juga.</p>
+                    <p class="text-slate-600 text-sm leading-relaxed">Menu update data debitur yang melakukan pembayaran. Data diperbarui secara berkala dari SharePoint dalam format CSV.</p>
                 </div>
 
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all">
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('monitor')">
                     <h3 class="text-lg font-bold text-btn-blue mb-2">Monitor Live</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Menu untuk memantau pergerakan, aktivitas, dan progres secara live.</p>
+                    <p class="text-slate-600 text-sm leading-relaxed">Menu untuk memantau lokasi pergerakan, aktivitas, dan progres tim penagihan secara real-time.</p>
                 </div>
             </div>
         </div>
@@ -90,34 +91,36 @@
         <div id="container-iframe" class="hidden w-full h-full">
             <div id="loader" class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white/80">
                 <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin-slow"></div>
-                <p class="mt-4 text-blue-900 font-semibold animate-pulse">Memuat Data...</p>
+                <p class="mt-4 text-blue-900 font-semibold animate-pulse">Memuat Halaman...</p>
             </div>
             <iframe id="iframe-app" src="" onload="document.getElementById('loader').classList.add('hidden')" class="w-full h-[calc(100vh-140px)] border-none rounded-2xl shadow-sm bg-white"></iframe>
         </div>
     </main>
 
     <script>
+        // Tanggal otomatis Bahasa Indonesia
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const hariIni = new Date().toLocaleDateString('id-ID', options);
         document.getElementById('tanggal-sekarang').innerText = hariIni;
 
+        // Base URL Apps Script Web App
         const BASE_URL = "https://script.google.com/macros/s/AKfycbxl-tMIeAIvF3hHspvsdFmUpkLLBmS9W36i_fgmRMKCznoX6S4w-UiBdtmV08BgxCK5/exec";
         
+        // Fungsi ganti konten dengan Cache Buster (&t=timestamp)
         function gantiKonten(page, el = null) {
             const buttons = document.querySelectorAll('.nav-btn');
             
-            // Hapus status aktif dari semua tombol
+            // Reset status tombol navigasi
             buttons.forEach(btn => {
                 btn.classList.remove('text-btn-blue', 'font-bold', 'border-b-2', 'border-btn-red');
                 btn.classList.add('text-slate-500', 'font-semibold');
             });
             
-            // Jika dipanggil dari logo (el = null) dan kembali ke beranda, pastikan tombol Beranda yang aktif
+            // Set tombol aktif
             if (!el && page === 'beranda') {
                 el = document.getElementById('btn-beranda');
             }
 
-            // Set status aktif pada tombol yang dipilih
             if (el && el.classList.contains('nav-btn')) {
                 el.classList.add('text-btn-blue', 'font-bold', 'border-b-2', 'border-btn-red');
                 el.classList.remove('text-slate-500', 'font-semibold');
@@ -137,11 +140,18 @@
                 containerIframe.classList.remove('hidden');
                 loader.classList.remove('hidden'); 
                 
-                // Perbaikan: Menghilangkan double slash // di akhir URL dashboard
-                if (page === 'dashboard') iframe.src = "https://clqadmin.colekdek244.workers.dev/";
-                else if (page === 'rindeb') iframe.src = BASE_URL + "?page=UpdateRindeb";
-                else if (page === 'bayar') iframe.src = BASE_URL + "?page=UpdateBayar";
-                else if (page === 'monitor') iframe.src = "https://clqmonitor.colekdek244.workers.dev/";
+                // Tambahkan parameter timestamp &t=... untuk memutus caching iframe oleh browser
+                const timeStamp = new Date().getTime();
+
+                if (page === 'dashboard') {
+                    iframe.src = "https://clqadmin.colekdek244.workers.dev/?t=" + timeStamp;
+                } else if (page === 'rindeb') {
+                    iframe.src = BASE_URL + "?page=UpdateRindeb&t=" + timeStamp;
+                } else if (page === 'bayar') {
+                    iframe.src = BASE_URL + "?page=UpdateBayar&t=" + timeStamp;
+                } else if (page === 'monitor') {
+                    iframe.src = "https://clqmonitor.colekdek244.workers.dev/?t=" + timeStamp;
+                }
             }
         }
     </script>
