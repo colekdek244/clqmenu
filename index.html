@@ -3,157 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLQ - Menu Utama Admin Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="robots" content="noindex, nofollow">
+    <title>CLQ Mamuju — Mengalihkan…</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .text-btn-blue { color: #00529C; }
-        .bg-btn-red { background-color: #E30613; }
-        .border-btn-red { border-color: #E30613; }
-        
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin 1s linear infinite; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .kartu {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px 32px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .logo { font-size: 13px; font-weight: 700; color: #00529C; letter-spacing: 0.15em; margin-bottom: 24px; }
+        .spinner {
+            width: 44px; height: 44px; margin: 0 auto 20px;
+            border: 4px solid #e2e8f0;
+            border-top-color: #00529C;
+            border-radius: 50%;
+            animation: putar 0.8s linear infinite;
+        }
+        @keyframes putar { to { transform: rotate(360deg); } }
+        h1 { font-size: 18px; color: #1e293b; margin-bottom: 8px; }
+        p { font-size: 14px; color: #64748b; line-height: 1.6; }
+        .tombol {
+            display: inline-block; margin-top: 24px; padding: 12px 24px;
+            background: #00529C; color: #fff; text-decoration: none;
+            border-radius: 10px; font-weight: 600; font-size: 14px;
+        }
+        .catatan { margin-top: 20px; font-size: 12px; color: #94a3b8; word-break: break-all; }
     </style>
 </head>
-<body class="h-screen flex flex-col">
+<body>
+    <div class="kartu">
+        <div class="logo">CLQ MAMUJU</div>
+        <div class="spinner"></div>
+        <h1>Membuka aplikasi…</h1>
+        <p>Anda sedang diarahkan ke aplikasi CLQ yang baru.</p>
 
-    <!-- Peringatan Akses Mobile -->
-    <div class="fixed inset-0 z-[999] bg-slate-50 flex flex-col items-center justify-center p-6 text-center md:hidden">
-        <svg class="w-24 h-24 text-btn-red mb-4 animate-bounce" fill="none" stroke="#E30613" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-        </svg>
-        <h2 class="text-2xl font-extrabold text-slate-800 mb-3">Gunakan Laptop / PC</h2>
-        <p class="text-slate-600 text-sm leading-relaxed mb-6">
-            Admin Portal CLQ Mamuju memerlukan layar yang lebih besar untuk menampilkan data dengan baik. Harap buka halaman ini melalui <strong>Laptop atau Komputer</strong> Anda.
-        </p>
+        <a id="tombol-manual" class="tombol" href="https://clq-portal.colekdek244.workers.dev" style="display:none">
+            Buka aplikasi
+        </a>
+
+        <div class="catatan">Simpan alamat baru:<br>clq-portal.colekdek244.workers.dev</div>
     </div>
 
-    <!-- Navigation Bar Header -->
-    <nav class="sticky top-0 bg-white border-b border-gray-200 z-50 shadow-sm flex-shrink-0">
-        <div class="w-full px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-12 h-full">
-                <!-- Logo BTN & Brand -->
-                <div class="flex flex-col items-center cursor-pointer justify-center" onclick="gantiKonten('beranda')">
-                    <img src="https://www.btn.co.id/-/media/Images/Corporate/Icon/Logo-BTN.png" alt="Logo BTN" class="h-8">
-                    <span class="text-[10px] font-bold text-btn-blue tracking-widest mt-1">CLQ MAMUJU</span>
-                </div>
-                
-                <!-- Navigation Items -->
-                <div class="hidden md:flex gap-6 items-center h-full">
-                    <button id="btn-beranda" onclick="gantiKonten('beranda', this)" class="nav-btn text-btn-blue font-bold border-b-2 border-btn-red pb-1">Beranda</button>
-                    <button onclick="gantiKonten('dashboard', this)" class="nav-btn text-slate-500 hover:text-blue-600 font-semibold transition-colors">Dashboard</button>
-                    <button onclick="gantiKonten('rindeb', this)" class="nav-btn text-slate-500 hover:text-blue-600 font-semibold transition-colors">Update Rindeb</button>
-                    <button onclick="gantiKonten('bayar', this)" class="nav-btn text-slate-500 hover:text-blue-600 font-semibold transition-colors">Update Bayar</button>
-                    <button onclick="gantiKonten('monitor', this)" class="nav-btn text-slate-500 hover:text-blue-600 font-semibold transition-colors">Monitor Live</button>
-                </div>
-            </div>
-
-            <!-- Date Display -->
-            <div class="flex items-center h-full">
-                <p id="tanggal-sekarang" class="text-xs font-bold text-slate-400 uppercase tracking-wider"></p>
-            </div>
-        </div>
-    </nav>
-
-    <main class="flex-grow w-full px-4 py-6 relative" id="main-content">
-        <!-- View Beranda -->
-        <div id="view-beranda" class="max-w-4xl mx-auto space-y-6">
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-                <h1 class="text-3xl font-extrabold text-slate-800">Selamat Datang di Admin Portal CLQ Mamuju</h1>
-                <p class="text-slate-500 mt-2 font-medium">Silakan pilih menu di atas untuk mulai mengelola data:</p>
-            </div>
-
-            <div class="grid gap-4">
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('dashboard')">
-                    <h3 class="text-lg font-bold text-btn-blue mb-2">Dashboard</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Berisi submenu monitoring posisi target kunjungan harian, distribusi tugas, pembatalan tugas, pindah kelolaan, laporan kunjungan, dan manajemen user.</p>
-                </div>
-                
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('rindeb')">
-                    <h3 class="text-lg font-bold text-btn-blue mb-2">Update Rindeb</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Menu update Rindeb harian dengan data dari SharePoint. Mendukung fitur impor file Excel/CSV, inspeksi otomatis, serta sinkronisasi kelolaan debitur.</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('bayar')">
-                    <h3 class="text-lg font-bold text-btn-blue mb-2">Update Bayar</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Menu update data debitur yang melakukan pembayaran. Data diperbarui secara berkala dari SharePoint dalam format CSV.</p>
-                </div>
-
-                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:border-blue-400 transition-all cursor-pointer" onclick="gantiKonten('monitor')">
-                    <h3 class="text-lg font-bold text-btn-blue mb-2">Monitor Live</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Menu untuk memantau lokasi pergerakan, aktivitas, dan progres tim penagihan secara real-time.</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Iframe Container dengan Loading Overlay -->
-        <div id="container-iframe" class="hidden w-full h-full">
-            <div id="loader" class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white/80">
-                <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin-slow"></div>
-                <p class="mt-4 text-blue-900 font-semibold animate-pulse">Memuat Halaman...</p>
-            </div>
-            <iframe id="iframe-app" src="" onload="document.getElementById('loader').classList.add('hidden')" class="w-full h-[calc(100vh-140px)] border-none rounded-2xl shadow-sm bg-white"></iframe>
-        </div>
-    </main>
-
     <script>
-        // Tanggal otomatis Bahasa Indonesia
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const hariIni = new Date().toLocaleDateString('id-ID', options);
-        document.getElementById('tanggal-sekarang').innerText = hariIni;
+        // ============================================================================
+        // clqmenu sekarang HANYA MENGALIHKAN ke aplikasi utama (clq-portal).
+        //
+        // SEBELUMNYA halaman ini menyusun menu sendiri lalu memanggil 3 aplikasi
+        // terpisah lewat iframe:
+        //   - clqadmin.colekdek244.workers.dev   (dashboard)
+        //   - Apps Script /exec                  (update rindeb & update bayar)
+        //   - clqmonitor.colekdek244.workers.dev (monitor peta)
+        //
+        // Cara itu bermasalah: pekerjaan dua kali (menu lalu aplikasi), cookie
+        // login tidak terbawa di dalam iframe karena domainnya berbeda, dan kalau
+        // salah satu aplikasi error halamannya kosong tanpa penjelasan apa pun.
+        //
+        // Semua tujuan menu itu sekarang SUDAH ADA di dalam clq-portal beserta
+        // sidebar-nya: dashboard, rindeb, bayar, monitor, distribusi, laporan,
+        // pindah, pembatalan, dan users. Jadi lapisan menu di sini tidak perlu lagi.
+        //
+        // Halaman ini dipertahankan supaya alamat lama clqmenu.vercel.app tetap
+        // hidup, sehingga petugas yang sudah hafal alamat itu langsung sampai ke
+        // aplikasi baru tanpa harus belajar alamat baru.
+        // ============================================================================
 
-        // Base URL Apps Script Web App
-        const BASE_URL = "https://script.google.com/macros/s/AKfycbzhWlW0vJyH5MjWw5R565AQ9PVxVKKX5x8Yu59ReKrxZN20q8uweEtsHVmrGlxDnZBR/exec";
-        
-        // Fungsi ganti konten dengan Cache Buster (&t=timestamp)
-        function gantiKonten(page, el = null) {
-            const buttons = document.querySelectorAll('.nav-btn');
-            
-            // Reset status tombol navigasi
-            buttons.forEach(btn => {
-                btn.classList.remove('text-btn-blue', 'font-bold', 'border-b-2', 'border-btn-red');
-                btn.classList.add('text-slate-500', 'font-semibold');
-            });
-            
-            // Set tombol aktif
-            if (!el && page === 'beranda') {
-                el = document.getElementById('btn-beranda');
+        var TUJUAN = 'https://clq-portal.colekdek244.workers.dev';
+
+        // Padanan nama menu -> alamat di clq-portal.
+        //
+        // PENTING: kunci di bawah ini SENGAJA memuat dua gaya penulisan, 'rindeb'
+        // dan 'updaterindeb'. Alamat lama memakai ?page=UpdateRindeb sementara
+        // alamat baru cukup ?page=rindeb. Normalisasi toLowerCase() saja TIDAK
+        // cukup: "updaterindeb" tidak sama dengan "rindeb", sehingga alamat lama
+        // akan mendarat di halaman utama alih-alih halaman yang diminta.
+        var PETA = {
+            'beranda':      '/beranda',
+            'dashboard':    '/dashboard',
+            'rindeb':       '/rindeb',
+            'updaterindeb': '/rindeb',
+            'bayar':        '/bayar',
+            'updatebayar':  '/bayar',
+            'monitor':      '/monitor',
+            'monitorlive':  '/monitor',
+            'distribusi':   '/distribusi',
+            'laporan':      '/laporan',
+            'pindah':       '/pindah',
+            'pembatalan':   '/pembatalan',
+            'users':        '/users'
+        };
+
+        (function () {
+            var diminta = new URLSearchParams(location.search).get('page');
+            var tujuan = TUJUAN;
+
+            if (diminta) {
+                // buang semua yang bukan huruf supaya "Update_Rindeb" atau
+                // "update-rindeb" tetap terbaca
+                var kunci = String(diminta).toLowerCase().replace(/[^a-z]/g, '');
+                if (PETA[kunci]) tujuan = TUJUAN + PETA[kunci];
             }
 
-            if (el && el.classList.contains('nav-btn')) {
-                el.classList.add('text-btn-blue', 'font-bold', 'border-b-2', 'border-btn-red');
-                el.classList.remove('text-slate-500', 'font-semibold');
-            }
+            // location.replace (bukan href) supaya halaman ini TIDAK masuk riwayat
+            // browser. Dengan href, tombol "kembali" petugas akan mendarat di sini
+            // lalu langsung dialihkan lagi — terasa seperti halaman yang tidak bisa
+            // ditinggalkan.
+            location.replace(tujuan);
+        })();
 
-            const beranda = document.getElementById('view-beranda');
-            const containerIframe = document.getElementById('container-iframe');
-            const iframe = document.getElementById('iframe-app');
-            const loader = document.getElementById('loader');
-            
-            if (page === 'beranda') {
-                beranda.classList.remove('hidden');
-                containerIframe.classList.add('hidden');
-                iframe.src = "";
-            } else {
-                beranda.classList.add('hidden');
-                containerIframe.classList.remove('hidden');
-                loader.classList.remove('hidden'); 
-                
-                // Tambahkan parameter timestamp &t=... untuk memutus caching iframe oleh browser
-                const timeStamp = new Date().getTime();
-
-                if (page === 'dashboard') {
-                    iframe.src = "https://clqadmin.colekdek244.workers.dev/?t=" + timeStamp;
-                } else if (page === 'rindeb') {
-                    iframe.src = BASE_URL + "?page=UpdateRindeb&t=" + timeStamp;
-                } else if (page === 'bayar') {
-                    iframe.src = BASE_URL + "?page=UpdateBayar&t=" + timeStamp;
-                } else if (page === 'monitor') {
-                    iframe.src = "https://clqmonitor.colekdek244.workers.dev/?t=" + timeStamp;
-                }
-            }
-        }
+        // Munculkan tombol manual kalau pengalihan otomatis diblokir (mis. JavaScript
+        // dimatikan atau ekstensi memblokir). Lebih baik ada jalan keluar daripada
+        // layar yang berputar selamanya — masalah yang ada di versi lama.
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                var t = document.getElementById('tombol-manual');
+                if (t) t.style.display = 'inline-block';
+            }, 1500);
+        });
     </script>
 </body>
 </html>
